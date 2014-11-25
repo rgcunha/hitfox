@@ -1,0 +1,49 @@
+<ion-view title="Payments">
+  <ion-content padding="true">
+    <div class="row responsive-md">
+      <div class="col col-50 col-offset-25">
+        <div class="list">
+          <div class="item item-button-right" ng-repeat='payment in payments'>
+            <h2>To: {{payment.payee}}</h2>
+            <h4>Amount: {{payment.amount}}</h4>
+            <h4>Date: {{payment.date}}</h4>
+          </div>
+          <div class="item" ng-show="payments.length===0">
+            <p>Empty list</p>
+          </div>
+          <!-- Make New Payment -->
+          <div class="item">
+            <button ng-click="newPaymentModal.show()" class="button button-small button-positive icon icon-left ion-plus">Make Payment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+<!-- Make Payment -->
+<script id="new_payment.html" type="text/ng-template">
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">Make Payment</h1>
+    <button class="button button-clear button-primary icon ion-close" ng-click="makePaymentModal.hide()"></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">To</span>
+        <input ng-model="newPayment.payee" type="text" placeholder="Payee Name">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Amount</span>
+        <input ng-model="newPayment.amount" type="number" placeholder="Amount">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Date</span>
+        <input ng-model="newPayment.date" type="date" placeholder="Date">
+      </label>
+    </div>
+    <button class="button button-positive" ng-click="makePayment()">Submit</button>
+  </ion-content>
+</ion-modal-view>
+</script>

@@ -1,0 +1,57 @@
+<ion-view title="Payees">
+  <ion-content padding="true">
+    <div class="row responsive-md">
+      <div class="col col-50 col-offset-25">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="search" ng-model="qry" placeholder="Search for payees...">
+          </label>
+        </div>
+        <div class="list">
+          <div class="item item-button-right" ng-repeat='payee in payees | filter: qry'>
+            <h2>{{payee.name}}</h2>
+            <h4>{{payee.bank}} - {{payee.IBAN}}</h4>
+            <button class="button button-clear button-assertive" ng-click="deletePayee(payee.id)">
+              <i class="icon ion-trash-b"></i>
+            </button>
+          </div>
+          <div class="item" ng-show="payees.length===0">
+            <p>Empty list</p>
+          </div>
+          <!-- Create New Payee -->
+          <div class="item">
+            <button ng-click="newPayeeModal.show()" class="button button-small button-positive icon icon-left ion-plus">Create Payee</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+<!-- New Payee -->
+<script id="new_payee.html" type="text/ng-template">
+<ion-modal-view>
+	<ion-header-bar class="bar bar-header bar-positive">
+		<h1 class="title">New Payee</h1>
+		<button class="button button-clear button-primary icon ion-close" ng-click="newPayeeModal.hide()"></button>
+	</ion-header-bar>
+	<ion-content class="padding">
+		<div class="list">
+			<label class="item item-input">
+				<span class="input-label">Name</span>
+				<input ng-model="newPayee.name" type="text" placeholder="Payee Name">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">Bank</span>
+				<input ng-model="newPayee.bank" type="text" placeholder="Payee Bank Name">
+			</label>
+      <label class="item item-input">
+        <span class="input-label">IBAN</span>
+        <input ng-model="newPayee.IBAN" type="text" placeholder="Payee IBAN">
+      </label>
+		</div>
+		<button class="button button-positive" ng-click="createPayee()">Submit</button>
+	</ion-content>
+</ion-modal-view>
+</script>

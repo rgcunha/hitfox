@@ -1,0 +1,17 @@
+<ion-view>
+  <ion-nav-buttons side="right">
+    <button class="button button-positive icon icon-left ion-log-out" ng-click="exit()">Exit</button>
+  </ion-nav-buttons>
+
+  <ion-tabs class="tabs-icon-top tabs-positive">
+    <ion-tab title="Balance" icon="ion-cash" ui-sref="account.balance">
+      <ion-nav-view name="balance-tab"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="Payees" icon="ion-person-stalker" ui-sref="account.payees">
+      <ion-nav-view name="payees-tab"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="Payments" icon="ion-forward" ui-sref="account.payments">
+      <ion-nav-view name="payments-tab"></ion-nav-view>
+    </ion-tab>
+  </ion-tabs>
+</ion-view>

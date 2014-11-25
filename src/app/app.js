@@ -1,4 +1,11 @@
 
 angular.module('hitfoxapp', [
-  'ngRoute'
+  'ionic',
+  'appRoutes',
+  'MainCtrl',
+  'BalanceCtrl',
+  'PayeesCtrl',
+  'PaymentsCtrl',
+  'CustomerService',
+  'AccountService'
 ]);
