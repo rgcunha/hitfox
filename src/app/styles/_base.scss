@@ -1,3 +1,5 @@
+/* base elements */
+
 body {
   padding: 50px;
   font: 16px/150% "Helvetica Neue", "Lucida Grande", Verdana, sans-serif;
@@ -11,6 +13,14 @@ button {
   font: inherit;
 }
 
+/* panel backgrounds */
+
+.panel {
+   background-color: $balanced;
+   padding: $grid-padding-width;
+   box-shadow: 5px 5px 5px $energized;
+   margin-bottom: $grid-padding-width;
+}
 
 /* form validation */
 .field-error {
@@ -28,4 +38,18 @@ button {
     margin: 10px 25px;
     color: #cc2511;
     font-weight: bold;
+}
+
+/* accordion list */
+
+.list .item.item-accordion {
+  line-height: 38px;
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
 }

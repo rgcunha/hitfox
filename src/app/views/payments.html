@@ -2,19 +2,39 @@
   <ion-content padding="true">
     <div class="row responsive-md">
       <div class="col col-50 col-offset-25">
-        <div class="list">
-          <div class="item item-button-right" ng-repeat='payment in payments'>
-            <h2>To: {{payment.payee.name}}</h2>
-            <h4>Amount: {{payment.amount}}</h4>
-            <h4>Date: {{payment.date}}</h4>
-          </div>
-          <div class="item" ng-show="payments.length===0">
-            <p>This list is empty</p>
+        <div class="panel">
+
+          <div class="list">
+            <div ng-repeat='payment in payments'>
+
+              <!-- Payee Name -->
+              <div class="item"
+                      ng-click="toggleDetails(payment)"
+                      ng-class="{active: isSelected(payment)}">
+                <i class="icon" ng-class="isSelected(payment) ? 'ion-minus' : 'ion-plus'"></i>
+                <span>To: {{payment.payee.name}}</span>
+              </div>
+
+              <!-- Hidden Details -->
+              <div class="item item-accordion" ng-show="isSelected(payment)">
+                <div class="row responsive-md">
+                  <div class="col col-50">
+                    <h2>Date: {{payment.date}}</h2>
+                  </div>
+                  <div class="col col-50">
+                    <h2>Amount: {{payment.amount}}</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Empty List Warning -->
+            <div ng-show="payments.length===0">
+              <p>No results found. You must make new payments.</p>
+            </div>
           </div>
           <!-- Make New Payment -->
-          <div class="item">
-            <button ng-click="newPaymentModal.show()" class="button button-positive icon icon-left ion-plus">Make Payment</button>
-          </div>
+          <button ng-click="newPaymentModal.show()" class="button button-royal">Make Payment</button>
         </div>
       </div>
     </div>
@@ -51,7 +71,7 @@
         <li ng-show="submitted && userForm.amount.$error.required">Amount Is Required</li>
         <li ng-show="submitted && userForm.date.$error.required">Date Is Required</li>
       </ul>
-      <button class="button button-positive" ng-click="submitForm()">Submit</button>
+      <button class="button button-royal" ng-click="submitForm()">Submit</button>
     </form>
   </ion-content>
 </ion-modal-view>

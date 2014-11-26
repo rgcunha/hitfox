@@ -2,27 +2,50 @@
   <ion-content padding="true">
     <div class="row responsive-md">
       <div class="col col-50 col-offset-25">
-        <div class="list list-inset">
-          <label class="item item-input">
-            <i class="icon ion-search placeholder-icon"></i>
-            <input type="search" ng-model="qry" placeholder="Search for payees...">
-          </label>
-        </div>
-        <div class="list">
-          <div class="item item-button-right" ng-repeat='payee in payees | filter: qry'>
-            <h2>{{payee.name}}</h2>
-            <h4>{{payee.bank}} - {{payee.IBAN}}</h4>
-            <button class="button button-clear button-assertive" ng-click="deletePayee(payee.id)">
-              <i class="icon ion-trash-b"></i>
-            </button>
+        <div class="panel">
+
+          <!-- Search -->
+          <div class="list list-inset">
+            <label class="item item-input">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input type="search" ng-model="qry" placeholder="Search for payees...">
+            </label>
           </div>
-          <div class="item" ng-show="payees.length===0">
-            <p>This list is empty</p>
+
+          <div class="list">
+            <div ng-repeat='payee in payees | filter: qry'>
+
+              <!-- Payee Name -->
+              <div class="item item-button-right"
+                      ng-click="toggleDetails(payee)"
+                      ng-class="{active: isSelected(payee)}">
+                <i class="icon" ng-class="isSelected(payee) ? 'ion-minus' : 'ion-plus'"></i>
+                <span>{{payee.name}}</span>
+                <button class="button button-clear button-assertive" ng-click="deletePayee(payee.id, $event)">
+                  <i class="icon ion-trash-b"></i>
+                </button>
+              </div>
+
+              <!-- Hidden Details -->
+              <div class="item item-accordion" ng-show="isSelected(payee)">
+                <div class="row responsive-md">
+                  <div class="col col-50">
+                    <h2>Bank: {{payee.bank}}</h2>
+                  </div>
+                  <div class="col col-50">
+                    <h2>IBAN: {{payee.IBAN}}</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Empty List Warning -->
+            <div ng-show="payees.length===0">
+              <p>No results found. You must create new payees.</p>
+            </div>
           </div>
           <!-- Create New Payee -->
-          <div class="item">
-            <button ng-click="newPayeeModal.show()" class="button  button-positive icon icon-left ion-plus">Create Payee</button>
-          </div>
+          <button ng-click="newPayeeModal.show()" class="button button-royal">Create Payee</button>
         </div>
       </div>
     </div>
@@ -52,7 +75,7 @@
           <input ng-model="newPayee.IBAN" type="text" name="payeeIBAN" placeholder="Payee IBAN" required ng-minlength="21" ng-maxlength="21">
         </label>
   		</div>
-      
+
       <ul class="form-errors">
         <li ng-show="submitted && userForm.payeeName.$error.minlength">Payee Name Must Be At Least 2 Characters Long</li>
         <li ng-show="submitted && userForm.payeeName.$error.required">Payee Name Is Required</li>
@@ -61,7 +84,7 @@
         <li ng-show="submitted && (userForm.payeeIBAN.$error.minlength || userForm.payeeIBAN.$error.maxlength)">IBAN Must have 21 Characters</li>
         <li ng-show="submitted && userForm.payeeIBAN.$error.required">IBAN Is Required</li>
       </ul>
-  		<button class="button  button-positive" ng-click="submitForm()">Submit</button>
+  		<button class="button  button-royal" ng-click="submitForm()">Submit</button>
     </form>
 	</ion-content>
 </ion-modal-view>

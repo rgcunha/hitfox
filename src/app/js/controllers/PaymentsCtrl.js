@@ -29,4 +29,16 @@ angular.module('PaymentsCtrl', []).controller('PaymentsCtrl', function($scope, $
 		$scope.payments = Account.getTransfers($scope.accountId);
 	};
 
+	$scope.toggleDetails = function(payment) {
+		if ($scope.isSelected(payment)) {
+			$scope.selectedPayment = null;
+		} else {
+			$scope.selectedPayment = payment;
+		}
+	};
+
+	$scope.isSelected = function(payment) {
+		return $scope.selectedPayment === payment;
+	};
+
 });

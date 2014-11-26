@@ -28,7 +28,8 @@ angular.module('PayeesCtrl', []).controller('PayeesCtrl', function($scope, $stat
 		$scope.payees = Account.getPayees($scope.accountId)
 	};
 
-  $scope.deletePayee = function(id) {
+  $scope.deletePayee = function(id, event) {
+		event.stopPropagation();
     var dropConfirmationPopup = $ionicPopup.confirm({
       title: 'Confirmation',
       template: '<p>Are you sure you want to delete this payee?</p>'
@@ -40,5 +41,17 @@ angular.module('PayeesCtrl', []).controller('PayeesCtrl', function($scope, $stat
       }
     });
 	};
+
+	$scope.toggleDetails = function(payee) {
+    if ($scope.isSelected(payee)) {
+      $scope.selectedPayee = null;
+    } else {
+      $scope.selectedPayee = payee;
+    }
+  };
+
+  $scope.isSelected = function(payee) {
+    return $scope.selectedPayee === payee;
+  };
 
 });
