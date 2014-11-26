@@ -13,7 +13,7 @@
           </div>
 
           <div class="list">
-            <div ng-repeat='payee in payees | filter: qry'>
+            <div ng-repeat='payee in payees | filter: qry | orderBy: sort'>
 
               <!-- Payee Name -->
               <div class="item item-button-right"

@@ -4,6 +4,7 @@ angular.module('PayeesCtrl', []).controller('PayeesCtrl', function($scope, $stat
 	$scope.payees = Account.getPayees($scope.accountId)
 	$scope.newPayee = {};
 	$scope.submitted = false;
+	$scope.sort = 'name';
 
   $ionicModal.fromTemplateUrl('new_payee.html', {
     scope: $scope,

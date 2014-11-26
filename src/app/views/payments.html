@@ -5,7 +5,7 @@
         <div class="panel">
 
           <div class="list">
-            <div ng-repeat='payment in payments'>
+            <div ng-repeat='payment in payments | orderBy:sort:reverse'>
 
               <!-- Payee Name -->
               <div class="item"

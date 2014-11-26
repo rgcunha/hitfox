@@ -5,6 +5,8 @@ angular.module('PaymentsCtrl', []).controller('PaymentsCtrl', function($scope, $
 	$scope.payees = Account.getPayees($scope.accountId);
 	$scope.newPayment = {};
 	$scope.submitted = false;
+	$scope.sort = 'date';
+	$scope.reverse = true;
 
 	$ionicModal.fromTemplateUrl('new_payment.html', {
 		scope: $scope,
