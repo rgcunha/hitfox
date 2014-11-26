@@ -4,12 +4,12 @@
       <div class="col col-50 col-offset-25">
         <div class="list">
           <div class="item item-button-right" ng-repeat='payment in payments'>
-            <h2>To: {{payment.payee}}</h2>
+            <h2>To: {{payment.payee.name}}</h2>
             <h4>Amount: {{payment.amount}}</h4>
             <h4>Date: {{payment.date}}</h4>
           </div>
           <div class="item" ng-show="payments.length===0">
-            <p>Empty list</p>
+            <p>This list is empty</p>
           </div>
           <!-- Make New Payment -->
           <div class="item">
@@ -26,13 +26,14 @@
 <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-positive">
     <h1 class="title">Make Payment</h1>
-    <button class="button button-clear button-primary icon ion-close" ng-click="makePaymentModal.hide()"></button>
+    <button class="button button-clear button-primary icon ion-close" ng-click="newPaymentModal.hide()"></button>
   </ion-header-bar>
   <ion-content class="padding">
     <div class="list">
-      <label class="item item-input">
-        <span class="input-label">To</span>
-        <input ng-model="newPayment.payee" type="text" placeholder="Payee Name">
+      <label class="item item-input item-select">
+        <div class="input-label">To</div>
+        <select ng-model="newPayment.payee" ng-options="payee.id as payee.name for payee in payees">
+        </select>
       </label>
       <label class="item item-input">
         <span class="input-label">Amount</span>

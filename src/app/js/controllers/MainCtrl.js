@@ -7,8 +7,4 @@ angular.module('MainCtrl', []).controller('MainCtrl', function($scope, $state, A
       $state.go('account.balance', {account_id: id});
   };
 
-  $scope.exit = function() {
-		$state.go('home');
-	};
-
 });

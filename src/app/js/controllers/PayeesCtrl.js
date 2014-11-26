@@ -13,6 +13,10 @@ angular.module('PayeesCtrl', []).controller('PayeesCtrl', function($scope, $stat
   });
 
 	$scope.createPayee = function() {
+
+		//var account = Account.getById
+
+
 		Account.createPayee($scope.accountId, $scope.newPayee);
 		$scope.newPayee = {};
 		$scope.payees = Account.getPayees($scope.accountId)

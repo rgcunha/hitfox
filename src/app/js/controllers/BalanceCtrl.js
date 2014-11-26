@@ -1,4 +1,4 @@
-angular.module('BalanceCtrl', []).controller('BalanceCtrl', function($scope, $stateParams) {
+angular.module('BalanceCtrl', []).controller('BalanceCtrl', function($scope, $stateParams, Account) {
 		var accountId = $stateParams.account_id;
-		$scope.balance = $scope.accounts[accountId - 1].balance;
+		$scope.balance = Account.getById(accountId).balance;
 });

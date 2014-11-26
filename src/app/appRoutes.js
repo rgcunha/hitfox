@@ -2,15 +2,17 @@ angular.module('appRoutes', []).config(['$stateProvider', '$urlRouterProvider', 
 
     $stateProvider
 
-        .state('home', {
-            url: '/',
-            templateUrl: '/hitfoxapp/views/home.html'
+        .state('accounts', {
+            url: '/accounts',
+            templateUrl: '/hitfoxapp/views/accounts.html',
+            controller: 'MainCtrl'
         })
 
         .state('account', {
             url: '/account/:account_id',
             abstract: true,
-            templateUrl: '/hitfoxapp/views/account.html'
+            templateUrl: '/hitfoxapp/views/account.html',
+            controller: 'AccountCtrl'
         })
 
         .state('account.balance', {
@@ -43,6 +45,6 @@ angular.module('appRoutes', []).config(['$stateProvider', '$urlRouterProvider', 
             }
         });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/accounts');
 
 }]);

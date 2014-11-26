@@ -1,11 +1,12 @@
-<ion-view title="Home">
-  <ion-content>
+<ion-view title="Accounts">
+  <ion-content padding="true">
     <div class="row responsive-md">
       <div class="col col-50 col-offset-25">
-        <h4><i class="icon icon-left ion-person"></i>Customer Accounts</h4>
         <div class="list">
           <div class="item" ng-repeat='account in accounts' ng-click="accountDetails({{account.id}})">
-            <h2>#{{$index + 1}}: {{account.name}} - IBAN {{account.IBAN}}</h2>
+            <h2>#{{$index + 1}}</h2>
+            <h2>Name: {{account.name}}<h2>
+            <h2>IBAN: {{account.IBAN}}</h2>
           </div>
         </div>
       </div>
