@@ -4,6 +4,7 @@ HitFoxApp
 ## Technologies Used and Reasons:
 
 AngularJS:  Modern MVC JS web framework, with a very good definition of concepts (Controllers, Views, Services etc) with 2 way data binding support, very convenient for fast prototyping.
+
 Ionic: Mobile first design framework, that also looks nice in Desktop. Components written in AngularJS. Easy customization with sass support.
 
 ## Development
