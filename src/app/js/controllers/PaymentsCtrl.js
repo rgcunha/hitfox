@@ -3,13 +3,8 @@ angular.module('PaymentsCtrl', []).controller('PaymentsCtrl', function($scope, $
 	$scope.accountId = $stateParams.account_id;
 	$scope.payments = Account.getTransfers($scope.accountId);
 	$scope.payees = Account.getPayees($scope.accountId);
-	//$scope.selectedPayee ={};
 	$scope.newPayment = {};
-
-	/*angular.forEach($scope.payments, function(payment) {
-		payment.payee = Account.getPayeeFromTransfer($scope.accountId, payment.id);
-	});*/
-
+	$scope.submitted = false;
 
 	$ionicModal.fromTemplateUrl('new_payment.html', {
 		scope: $scope,
@@ -19,15 +14,19 @@ angular.module('PaymentsCtrl', []).controller('PaymentsCtrl', function($scope, $
 		$scope.newPaymentModal = modal;
 	});
 
-	$scope.makePayment = function() {
-		//$scope.newPayment.payee = $scope.selectedPayee.id;
+  $scope.submitForm = function(isValid) {
+    $scope.submitted = true;
+		if (isValid) {
+			$scope.submitted = false;
+      makePayment();
+			$scope.newPaymentModal.hide();
+		}
+  };
+
+	makePayment = function() {
 		Account.createTransfer($scope.accountId, $scope.newPayment);
 		$scope.newPayment = {};
 		$scope.payments = Account.getTransfers($scope.accountId);
-		/*angular.forEach($scope.payments, function(payment) {
-			payment.payee = Account.getPayeeFromTransfer($scope.accountId, payment.id);
-		});*/
-		$scope.newPaymentModal.hide();
 	};
 
 });

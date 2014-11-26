@@ -3,6 +3,7 @@ angular.module('PayeesCtrl', []).controller('PayeesCtrl', function($scope, $stat
 	$scope.accountId = $stateParams.account_id;
 	$scope.payees = Account.getPayees($scope.accountId)
 	$scope.newPayee = {};
+	$scope.submitted = false;
 
   $ionicModal.fromTemplateUrl('new_payee.html', {
     scope: $scope,
@@ -12,15 +13,19 @@ angular.module('PayeesCtrl', []).controller('PayeesCtrl', function($scope, $stat
     $scope.newPayeeModal = modal;
   });
 
-	$scope.createPayee = function() {
+	$scope.submitForm = function(isValid) {
+		$scope.submitted = true;
+		if (isValid) {
+			$scope.submitted = false;
+			createPayee();
+			$scope.newPayeeModal.hide();
+		}
+	};
 
-		//var account = Account.getById
-
-
+	createPayee = function() {
 		Account.createPayee($scope.accountId, $scope.newPayee);
 		$scope.newPayee = {};
 		$scope.payees = Account.getPayees($scope.accountId)
-		$scope.newPayeeModal.hide();
 	};
 
   $scope.deletePayee = function(id) {

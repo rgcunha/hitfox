@@ -2,11 +2,12 @@
   <ion-content padding="true">
     <div class="row responsive-md">
       <div class="col col-50 col-offset-25">
+        <p>Select one the following accounts to initialize test data</p>
         <div class="list">
           <div class="item" ng-repeat='account in accounts' ng-click="accountDetails({{account.id}})">
-            <h2>#{{$index + 1}}</h2>
             <h2>Name: {{account.name}}<h2>
             <h2>IBAN: {{account.IBAN}}</h2>
+            <h2>Balance: {{account.balance}}</h2>
           </div>
         </div>
       </div>

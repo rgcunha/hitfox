@@ -13,7 +13,7 @@
           </div>
           <!-- Make New Payment -->
           <div class="item">
-            <button ng-click="newPaymentModal.show()" class="button button-small button-positive icon icon-left ion-plus">Make Payment</button>
+            <button ng-click="newPaymentModal.show()" class="button button-positive icon icon-left ion-plus">Make Payment</button>
           </div>
         </div>
       </div>
@@ -29,22 +29,30 @@
     <button class="button button-clear button-primary icon ion-close" ng-click="newPaymentModal.hide()"></button>
   </ion-header-bar>
   <ion-content class="padding">
-    <div class="list">
-      <label class="item item-input item-select">
-        <div class="input-label">To</div>
-        <select ng-model="newPayment.payee" ng-options="payee.id as payee.name for payee in payees">
-        </select>
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Amount</span>
-        <input ng-model="newPayment.amount" type="number" placeholder="Amount">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Date</span>
-        <input ng-model="newPayment.date" type="date" placeholder="Date">
-      </label>
-    </div>
-    <button class="button button-positive" ng-click="makePayment()">Submit</button>
+    <form name="userForm"ng-submit="submitForm(userForm.$valid)" novalidate>
+      <div class="list">
+        <label class="item item-input item-select" ng-class="{'field-error': submitted && userForm.payee.$invalid }">
+          <div class="input-label">To</div>
+          <select ng-model="newPayment.payee" name="payee" ng-options="payee.id as payee.name for payee in payees" required>
+          </select>
+        </label>
+        <label class="item item-input" ng-class="{'field-error': submitted && userForm.amount.$invalid }">
+          <span class="input-label">Amount</span>
+          <input ng-model="newPayment.amount" type="text" name="amount" placeholder="Amount" ng-pattern="/^(0|[1-9][0-9]*)$/" required>
+        </label>
+        <label class="item item-input" ng-class="{'field-error': submitted && userForm.date.$invalid }">
+          <span class="input-label">Date</span>
+          <input ng-model="newPayment.date" type="date" name="date" placeholder="Date" required>
+        </label>
+      </div>
+      <ul class="form-errors">
+        <li ng-show="submitted && userForm.payee.$error.required">Payee is Required</li>
+        <li ng-show="submitted && userForm.amount.$error.pattern">Amount must be a positive number</li>
+        <li ng-show="submitted && userForm.amount.$error.required">Amount Is Required</li>
+        <li ng-show="submitted && userForm.date.$error.required">Date Is Required</li>
+      </ul>
+      <button class="button button-positive" ng-click="submitForm()">Submit</button>
+    </form>
   </ion-content>
 </ion-modal-view>
 </script>

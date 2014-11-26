@@ -1,6 +1,6 @@
 body {
   padding: 50px;
-  font: 20px/150% "Helvetica Neue", "Lucida Grande", Verdana, sans-serif;
+  font: 16px/150% "Helvetica Neue", "Lucida Grande", Verdana, sans-serif;
   color: #666;
   background: #fcfcfc;
 }
@@ -9,4 +9,23 @@ input,
 textarea,
 button {
   font: inherit;
+}
+
+
+/* form validation */
+.field-error {
+    border-bottom: 2px solid red;
+}
+
+.form-errors ul {
+    margin: 10px;
+}
+
+.form-errors > li {
+    text-align: left;
+    list-style-position: outside;
+    list-style-type: disc;
+    margin: 10px 25px;
+    color: #cc2511;
+    font-weight: bold;
 }

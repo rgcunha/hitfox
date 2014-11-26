@@ -21,7 +21,7 @@
           </div>
           <!-- Create New Payee -->
           <div class="item">
-            <button ng-click="newPayeeModal.show()" class="button button-small button-positive icon icon-left ion-plus">Create Payee</button>
+            <button ng-click="newPayeeModal.show()" class="button  button-positive icon icon-left ion-plus">Create Payee</button>
           </div>
         </div>
       </div>
@@ -37,21 +37,32 @@
 		<button class="button button-clear button-primary icon ion-close" ng-click="newPayeeModal.hide()"></button>
 	</ion-header-bar>
 	<ion-content class="padding">
-		<div class="list">
-			<label class="item item-input">
-				<span class="input-label">Name</span>
-				<input ng-model="newPayee.name" type="text" placeholder="Payee Name">
-			</label>
-			<label class="item item-input">
-				<span class="input-label">Bank</span>
-				<input ng-model="newPayee.bank" type="text" placeholder="Payee Bank Name">
-			</label>
-      <label class="item item-input">
-        <span class="input-label">IBAN</span>
-        <input ng-model="newPayee.IBAN" type="text" placeholder="Payee IBAN">
-      </label>
-		</div>
-		<button class="button button-positive" ng-click="createPayee()">Submit</button>
+    <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
+  		<div class="list">
+  			<label class="item item-input" ng-class="{'field-error': submitted && userForm.payeeName.$invalid }">
+  				<span class="input-label">Name</span>
+  				<input ng-model="newPayee.name" type="text" name="payeeName" placeholder="Payee Name" required ng-minlength="2">
+  			</label>
+  			<label class="item item-input"ng-class="{'field-error': submitted && userForm.payeeBank.$invalid }">
+  				<span class="input-label">Bank</span>
+  				<input ng-model="newPayee.bank" type="text" name="payeeBank" placeholder="Payee Bank Name" required ng-minlength="2">
+  			</label>
+        <label class="item item-input" ng-class="{'field-error': submitted && userForm.payeeIBAN.$invalid }">
+          <span class="input-label">IBAN</span>
+          <input ng-model="newPayee.IBAN" type="text" name="payeeIBAN" placeholder="Payee IBAN" required ng-minlength="21" ng-maxlength="21">
+        </label>
+  		</div>
+      
+      <ul class="form-errors">
+        <li ng-show="submitted && userForm.payeeName.$error.minlength">Payee Name Must Be At Least 2 Characters Long</li>
+        <li ng-show="submitted && userForm.payeeName.$error.required">Payee Name Is Required</li>
+        <li ng-show="submitted && userForm.payeeBank.$error.minlength">Bank Name Must Be At Least 2 Characters Long</li>
+        <li ng-show="submitted && userForm.payeeBank.$error.required">Bank Name Is Required</li>
+        <li ng-show="submitted && (userForm.payeeIBAN.$error.minlength || userForm.payeeIBAN.$error.maxlength)">IBAN Must have 21 Characters</li>
+        <li ng-show="submitted && userForm.payeeIBAN.$error.required">IBAN Is Required</li>
+      </ul>
+  		<button class="button  button-positive" ng-click="submitForm()">Submit</button>
+    </form>
 	</ion-content>
 </ion-modal-view>
 </script>
